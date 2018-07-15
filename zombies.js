@@ -194,6 +194,17 @@ class Food extends Item {
       }
     }
 
+    equippedWith() {
+      if(this.equipped instanceof(Weapon) === true) {
+        console.log(this.name + " is equipped with " + this.equipped);
+        return this.equipped.name;
+      } else {
+        console.log("you ain't equipped with jack");
+        return false;
+      } 
+    }
+
+
 
  }
 
@@ -343,6 +354,15 @@ class Food extends Item {
  * @property {boolean} isAlive      Default value should be `true`.
  */
 
+class Zombie {
+  constructor(health, strength, speed){
+    this.health = health;
+    this.strength = strength;
+    this.speed = speed;
+    this._maxHealth = health;
+    this.isAlive = true;
+  }
+}
 
 /**
  * Class => FastZombie(health, strength, speed)
@@ -365,6 +385,11 @@ class Food extends Item {
  * -----------------------------
  */
 
+class FastZombie extends Zombie  {
+  constructor(health,strength, speed){
+    super(health, strength, speed);
+  }
+}
 
 
 /**
@@ -388,7 +413,11 @@ class Food extends Item {
  * -----------------------------
  */
 
-
+class StrongZombie extends Zombie {
+  constructor(health, strength, speed) {
+    super(health, strength, speed);
+  }
+}
 
 /**
  * Class => RangedZombie(health, strength, speed)
@@ -411,7 +440,11 @@ class Food extends Item {
  * -----------------------------
  */
 
-
+class RangedZombie extends Zombie {
+  constructor(health, strength, speed) {
+    super(health, strength, speed);
+  }
+}
 
 /**
  * Class => ExplodingZombie(health, strength, speed)
@@ -434,7 +467,11 @@ class Food extends Item {
  * -----------------------------
  */
 
-
+class ExplodingZombie extends Zombie {
+  constructor(health, strength, speed) {
+    super(health, strength, speed);
+  }
+}
 
 
 /**
