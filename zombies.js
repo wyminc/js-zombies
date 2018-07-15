@@ -105,17 +105,96 @@ class Food extends Item {
 
  class Player {
    constructor (name, health, strength, speed) {
-     this.pack = [];
-     this.maxHealth = health;
      this.name = name;
      this.health = health;
-     this.strength - strength;
+     this.strength = strength;
      this.speed = speed;
-     this.isAlive = "true";
-     this.equipped = weapon || "false";
-     this.getPack = pack;
-     this.getMaxHealth = maxHealth;
+     this._pack = [];
+     this._maxHealth = health;
+     this.isAlive = true;
+     this.equipped = false;
    }
+
+   getPack() {
+     return this._pack;
+   }
+
+   getMaxHealth() {
+    return this._maxHealth;
+   }
+
+   takeItem(Item) {
+     if (this._pack.length < 3) {
+       console.log(Item + " has been sucessfully picked up");
+      return this._pack.push(Item);
+     
+     } else {
+       console.log("Bag is full");
+       return this._pack;
+     }
+    }
+
+    discardItem(Item) {
+      console.log(this._pack);
+      if (this._pack.indexOf(Item) >= 0) {
+        this._pack.splice(this._pack.indexOf(Item),1);
+        console.log(Item + " has been discarded");
+        return true;
+      } else {
+        console.log("Item not found");
+        return false;
+      }
+    }
+
+    checkPack() {
+      console.log(this.getPack());
+      return this.getPack();
+    }
+
+    equip(itemToEquip) {
+      if(this._pack.indexOf(itemToEquip) >= 0 && itemToEquip instanceof(Weapon) === true) {
+        if(this.equipped == false) {
+          this.equipped = itemToEquip;
+          this._pack.splice(this._pack.indexOf(itemToEquip),1);
+        } else {
+          this._pack.push(this.equipped);
+          this.equipped = itemToEquip;
+          this._pack.splice(this._pack.indexOf(itemToEquip),1);
+        }
+      } else {
+        console.log("Item does not exist in pack");
+      }
+    }
+
+    eat(itemToEat) {
+      if(this._pack.indexOf(itemToEat) >= 0 && itemToEat instanceof(Food) === true) {
+        if(this.health + itemToEat.energy > 100) {
+          this.health = 100;
+          this._pack.splice(this._pack.indexOf(itemToEat),1);
+        } else {
+          this.health = this.health + itemToEat.energy;
+          this._pack.splice(this._pack.indexOf(itemToEat),1);
+        }
+      } else {
+        console.log ("What food?");
+      }
+    }
+
+    useItem(item) {
+      if(this._pack.indexOf(item) >= 0) {
+        if (item instanceof(Weapon) === true) {
+          this.equip(item);
+        } else if (item instanceof(Food) === true) {
+          this.eat(item);
+        } else {
+          console.log("Wtf am I doing");
+        }
+      } else {
+        console.log("Wtf am I doing");
+      }
+    }
+
+
  }
 
 
