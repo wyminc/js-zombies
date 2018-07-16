@@ -58,13 +58,17 @@ Weapon.prototype = Object.create(Item.prototype);
  * @property {number} energy
  */
 
+ function Food(name, energy) {
+  this.name = name;
+  this.energy = energy;
+ }
 
 /**
  * Food Extends Item Class
  * -----------------------------
  */
 
-
+Food.prototype = Object.create(Item.prototype);
 
 /**
  * Class => Player(name, health, strength, speed)
@@ -88,6 +92,26 @@ Weapon.prototype = Object.create(Item.prototype);
  * @property {method} getMaxHealth         Returns private variable `maxHealth`.
  */
 
+ function Player(name, health, strength, speed) {
+   this.name = name;
+   this.health = health;
+   this.strength = strength;
+   this.speed = speed;
+   this._pack = [];
+   this._maxHealth = health;
+   this.isAlive = true;
+   this.equipped = false;
+ }
+
+
+ Player.prototype.getPack = function(){
+  return this._pack;
+ }
+
+ Player.prototype.getMaxHealth = function() {
+   return this._maxHealth;
+ }
+
 
 /**
  * Player Class Method => checkPack()
@@ -100,6 +124,12 @@ Weapon.prototype = Object.create(Item.prototype);
  *
  * @name checkPack
  */
+
+Player.prototype.checkPack = function() {
+  console.log(this.getPack());
+  return this.getPack();
+}
+
 
 
 /**
@@ -119,7 +149,17 @@ Weapon.prototype = Object.create(Item.prototype);
  * @param {Item/Weapon/Food} item   The item to take.
  * @return {boolean} true/false     Whether player was able to store item in pack.
  */
-
+ 
+ Player.prototype.takeItem = function (item) {
+  if (this._pack.length >= 3) {
+    console.log("Pack is gawd damn full")
+    return false;
+  } else {
+    console.log(item + " has been sucessfully picked up")
+    this._pack.push(item);
+    return true;
+  }
+ }
 
 /**
  * Player Class Method => discardItem(item)
@@ -147,6 +187,17 @@ Weapon.prototype = Object.create(Item.prototype);
  * @return {boolean} true/false     Whether player was able to remove item from pack.
  */
 
+ Player.prototype.discardItem = function (item) {
+   if (this._pack.indexOf(item) < 0) {
+     console.log("Nothing was discarded because " + item + " doesn't exist in your bag")
+     return false;
+   } else {
+     this._pack.splice(this._pack.indexOf(item), 1);
+     console.log(this.name + " has discard " + item);
+     return true;
+   }
+ }
+
 
 /**
  * Player Class Method => equip(itemToEquip)
@@ -167,6 +218,22 @@ Weapon.prototype = Object.create(Item.prototype);
  * @name equip
  * @param {Weapon} itemToEquip  The weapon item to equip.
  */
+
+ Player.prototype.equip = function(itemToEquip) {
+   if(this._pack.indexOf(itemToEquip) >= 0 && itemToEquip instanceof(Weapon)) {
+     if(this.equipped !== false) {
+      console.log(this._pack, "What is in my bag");
+      this._pack.splice(this._pack.indexOf(itemToEquip), 1);
+      this._pack.push(this.equipped);
+      this.equipped = itemToEquip;
+      console.log(this._pack, "Discarding correctly");
+     } else {
+      this.equipped = itemToEquip;
+     } 
+    } else {
+      console.log("Nothing to equip because " + itemToEquip + " isn't in your bag")
+    }
+   }
 
 
 /**
