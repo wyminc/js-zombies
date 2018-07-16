@@ -12,6 +12,44 @@ For each test you complete:
 3. Check if the test passes.
 4. If it passes, commit your work.
 
+<<<<<<< HEAD
+=======
+---
+
+### Help
+
+See help with class construction, parameters, properties, and inheritence in
+[https://github.com/devleague/js-zombies/blob/master/doc/oop-example.pdf](/doc/oop-example.pdf)
+
+When instructed to call the super class, use the `Function.prototype.call` method.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+
+```
+// SUPER CLASS
+function Item(name) {
+  this.name = name;
+}
+
+// SUB CLASS
+function Weapon(name, damage) {
+  this.damage = damage;
+  Item.call(this, name); // Call super class
+}
+```
+
+To extend the super class, use the `Object.create` method introduced in
+https://github.com/devleague/oop-factory-example
+
+```
+// EXTEND SUPER CLASS
+Weapon.prototype = Object.create(Item.prototype, {
+  constructor: {
+    value: Item
+  }
+});
+```
+
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 ----
 
 ## Item(name)
@@ -103,6 +141,18 @@ Returns private variable `maxHealth`.
 
 ----
 
+<<<<<<< HEAD
+=======
+### checkPack()
+*Player checks the contents of their pack.*
+
+Nicely format and print the items in the player's pack.
+To access the pack, be sure to use Player's `getPack` method.
+You should be able to invoke this function on a Player instance.
+
+----
+
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 ### takeItem(item)
 *Player takes an item from the world and places it into their pack.*
 
@@ -232,7 +282,12 @@ You should be able to invoke this function on a Player instance.
 ## FastZombie(health, strength, speed)
 *Creates a fast zombie.*
 
+<<<<<<< HEAD
 The FastZombie class will extend the Zombie class.
+=======
+Use the `call` method on the Zombie constructor.
+Set FastZombie's prototype to a new instance of Zombie.
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 
 **Parameters**
 `health`: number, The zombie's health.
@@ -247,7 +302,12 @@ The FastZombie class will extend the Zombie class.
 ## StrongZombie(health, strength, speed)
 *Creates a strong zombie.*
 
+<<<<<<< HEAD
 The StrongZombie class will extend the Zombie class.
+=======
+Use the `call` method on the Zombie constructor.
+Set StrongZombie's prototype to a new instance of Zombie.
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 
 **Parameters**
 `health`: number, The zombie's health.
@@ -264,7 +324,12 @@ The StrongZombie class will extend the Zombie class.
 ## RangedZombie(health, strength, speed)
 *Creates a ranged zombie.*
 
+<<<<<<< HEAD
 The RangedZombie class will extend the Zombie class.
+=======
+Use the `call` method on the Zombie constructor.
+Set RangedZombie's prototype to a new instance of Zombie.
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 
 **Parameters**
 `health`: number, The zombie's health.
@@ -281,7 +346,12 @@ The RangedZombie class will extend the Zombie class.
 ## ExplodingZombie(health, strength, speed)
 *Creates an exploding zombie.*
 
+<<<<<<< HEAD
 The ExplodingZombie class will extend the Zombie class.
+=======
+Use the `call` method on the Zombie constructor.
+Set ExplodingZombie's prototype to a new instance of Zombie.
+>>>>>>> e5fae2571b33cf9d2074c8daa9de675ec50d26a2
 
 **Parameters**
 `health`: number, The zombie's health.
