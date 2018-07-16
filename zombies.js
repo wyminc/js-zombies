@@ -168,8 +168,8 @@ class Food extends Item {
 
     eat(itemToEat) {
       if(this._pack.indexOf(itemToEat) >= 0 && itemToEat instanceof(Food) === true) {
-        if(this.health + itemToEat.energy > 100) {
-          this.health = 100;
+        if(this.health + itemToEat.energy > this._maxHealth) {
+          this.health = this._maxHealth;
           this._pack.splice(this._pack.indexOf(itemToEat),1);
         } else {
           this.health = this.health + itemToEat.energy;
